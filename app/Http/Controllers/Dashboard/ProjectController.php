@@ -254,13 +254,18 @@ class ProjectController extends Controller
 
     }
 
+    public function showImages($id){
+        $project=Project::find($id);
+        return view("dashboard.project.show",compact('project'));
+    }
+
     public function storeImages(Request $request, $id)
     {
         $project=Project::find($id);
         $request->validate([
-            'service_image.*' => 'bail:required|image|mimes:jpeg,png'
+            'image.*' => 'bail:required|image|mimes:jpeg,png'
         ]);
-        if ($uploadFiles=$request->service_image) {
+        if ($uploadFiles=$request->image) {
             $images_ids=array();
             foreach ($uploadFiles as $uploadFile){
                 $image_name = time() . "_" .$uploadFile->getClientOriginalName();
@@ -275,6 +280,25 @@ class ProjectController extends Controller
         }
         //dd($request->file('product_im'));
 
+    }
+
+    public function destroyImage(Request $request, $id)
+    {
+        $project=Project::find($id);
+        $image = $request->image;
+        $image_id = $request->image_id;
+        $image_path = public_path("/storage/uploads/project/" . $image);
+        if (\File::exists($image_path))
+        {
+            unlink($image_path);
+        }
+        else
+        {
+
+        }
+
+        $imageData=Image::where("id",$image_id)->where("name", $image)->delete();
+        return back();
     }
 
 

@@ -128,6 +128,9 @@ Route::group(['middleware' => 'auth','prefix'=>'treasure-dashboard','namespace' 
 
     /*--------  Project   --------*/
     Route::resource('/project', 'ProjectController');
+    Route::get('/project/{id}/show-images','ProjectController@showImages');
+    Route::post("/project/show/{id}/deleteImage","ProjectController@destroyImage");
+    Route::post("/project/show/{id}/addImage","ProjectController@storeImages");
 
 
 

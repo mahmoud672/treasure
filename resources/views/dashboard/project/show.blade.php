@@ -25,13 +25,13 @@
 
     <section class="content-header">
         <h1>
-            Service Images
-            <small>All Service Images</small>
+            Project Images
+            <small>All Project Images</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{adminUrl("")}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="{{adminUrl("/service")}}">Service</a></li>
-            <li class="active">All Service Images</li>
+            <li><a href="{{adminUrl("/project")}}">Project</a></li>
+            <li class="active">All Project Images</li>
         </ol>
     </section>
 
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="box box-primary" style="padding: 15px">
                     <div class="box-header with-border">
-                        <h3 class="box-title">All Images For This Product</h3>
+                        <h3 class="box-title">All Images For This Project</h3>
                         <a href="#" class="btn btn-warning pull-right remove-btn modal-btn" data-toggle="modal" data-target="#add5">
                             <i class="fa fa-plus"></i> Add New Image </a>
                     </div>
@@ -51,16 +51,16 @@
                     <!-- form start -->
                     <div class="images-wrapper">
                         <ul>
-                            @if($service)
+                            @if($project)
 
-                                @if($service->images)
+                                @if($project->images)
                                 @php $count=0 @endphp
-                                @foreach($service->images as $service_image)
+                                @foreach($project->images as $image)
                                     <li>
                                         <div class="remove-btn modal-btn" data-toggle="modal" data-target="#delete{{$count}}">
                                             <i class="ion-ios-close-empty"></i>
                                         </div>
-                                        <img src="{{assetPath($service_image->path)}}" alt="img">
+                                        <img src="{{assetPath($image->path)}}" alt="img">
                                     </li>
                                     @php $count++ @endphp
                                 @endforeach
@@ -73,9 +73,9 @@
                         </ul>
                     </div>
 
-                    @if($service->images)
+                    @if($project->images)
                         @php $count=0 @endphp
-                        @foreach($service->images as $service_image)
+                        @foreach($project->images as $image)
                     <div class="modal modal-danger fade" id="delete{{$count}}">
 
                         <div class="modal-dialog">
@@ -86,14 +86,14 @@
                                     <h4 class="modal-title">Delete User</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are You Sure You Want To Delete This Image of <strong>{{$service->id}}</strong></p>
+                                    <p>Are You Sure You Want To Delete This Image of <strong>{{$project->id}}</strong></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{adminUrl("service")}}/show/{{$service->id}}/deleteImage" method="post">
+                                    <form action="{{adminUrl("project")}}/show/{{$project->id}}/deleteImage" method="post">
 
                                         @csrf
-                                        <input type="hidden"name="image"value="{{$service_image->name}}">
-                                        <input type="hidden"name="image_id"value="{{$service_image->id}}">
+                                        <input type="hidden"name="image"value="{{$image->name}}">
+                                        <input type="hidden"name="image_id"value="{{$image->id}}">
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="margin-right: 5px">
                                                 cancel
@@ -127,14 +127,14 @@
                                     <h4 class="modal-title">Add User</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are You Sure You Want To Add This Image For <strong>{{$service->id}}</strong></p>
+                                    <p>Are You Sure You Want To Add This Image For <strong>{{$project->id}}</strong></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{adminUrl("service").'/show/'.$service->id.'/addImage'}}" method="post"enctype="multipart/form-data">
+                                    <form action="{{adminUrl("project").'/show/'.$project->id.'/addImage'}}" method="post"enctype="multipart/form-data">
 
                                         @csrf
                                         {{-- <input type="hidden"name="image"value="{{$product_image->image}}">--}}
-                                        <input type="file" class="form-control" name="service_image[]" value=""multiple>
+                                        <input type="file" class="form-control" name="image[]" value=""multiple>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="margin-right: 5px">
                                                 cancel

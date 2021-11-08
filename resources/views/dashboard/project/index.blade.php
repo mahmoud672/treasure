@@ -88,6 +88,7 @@
                                     <td>{{$project->created_at ? $project->created_at->diffForHumans() : ''}}</td>
                                     <td>{{$project->updated_at ? $project->updated_at->diffForHumans() : ''}}</td>
                                     <td>
+                                        <a href="{{adminUrl("project/$project->id/show-images")}}" class="" style="font-size: 20px"><i class="fa fa-image"></i> </a>
                                         <a href="{{route('project.edit', $project->id)}}" class style="font-size: 20px"><i class="fa fa-pencil-square-o"></i> </a>
                                         <button type="button" class data-toggle="modal" data-target="#delete{{$project->id}}" style="font-size: 20px">
                                             <i class="fa fa-trash"></i>
