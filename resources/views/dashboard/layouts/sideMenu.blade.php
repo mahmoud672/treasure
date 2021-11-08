@@ -70,7 +70,7 @@
                 </ul>
             </li>--}}
 
-            <li class="treeview">
+            {{--<li class="treeview">
                 <a href="#">
                     <i class="fa fa-shopping-basket"></i>
                     <span>Products</span>
@@ -80,7 +80,7 @@
                     <li><a href="{{adminUrl('product/create')}}"><i class="fa fa-plus"></i> Add Product</a></li>
                     <li><a href="{{adminUrl('product')}}"><i class="fa fa-edit"></i> Show / Edit Product</a></li>
                 </ul>
-            </li>
+            </li>--}}
 
 
             {{--<li class="treeview">
