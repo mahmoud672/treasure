@@ -48,16 +48,14 @@ class Project extends Model  {
         return $this->belongsTo(Image::class, 'image_id', 'id')->withDefault();
     }
 
-    //--------------------- added new -----------------------
     public function images()
     {
         return $this->belongsToMany(Image::class, 'project_images','project_id','image_id')->withTimestamps();
     }
-    //------------------ ----------------------- ------------------------ --------------------
 
     public function iconImg()
     {
-        return $this->belongsTo(Image::class, 'icon', 'id')->withDefault();
+        return $this->belongsTo(Image::class, 'icon_id', 'id')->withDefault();
     }
 
     public function video()
@@ -91,6 +89,16 @@ class Project extends Model  {
     public function branch()
     {
         return $this->belongsTo(Branch::class,'branch_id','id')->withDefault();
+    }
+
+    public function open_graph()
+    {
+        return $this->belongsTo(\App\Models\SEO\Open_graph::class, 'open_graph_id', 'id')->withDefault();
+    }
+
+    public function page()
+    {
+        return $this->hasOne(\App\Models\SEO\Page::class, 'id', 'page_id')->withDefault();
     }
 
 }

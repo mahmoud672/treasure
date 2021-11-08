@@ -1,5 +1,5 @@
 @extends('website.layouts.layouts')
-@section('title', $project->{'service_'.currentLang()}->title)
+@section('title', $project->{'project_'.currentLang()}->title)
 
 @section('open-graph')
     <meta name="description" content="{{$og->description ? $og->description : $mainOpenGraph->description}}">

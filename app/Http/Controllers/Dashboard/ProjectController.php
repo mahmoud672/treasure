@@ -113,6 +113,8 @@ class ProjectController extends Controller
         $project->to_date   = $request->to_date;
         $project->image_id  = $request->image_id;
         $project->icon_id  = $request->icon;
+        $project->open_graph_id = $open_graph->id;
+        $project->page_id = $page->id;
         $project->save();
 
         $project->project_ar()->create([
@@ -149,6 +151,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
 
+        //dd($request->file("image_id"));
         $request->validate([
             'title_ar'          => 'bail|required|max:200',
             'title_en'          => 'bail|required|max:200',
@@ -173,6 +176,45 @@ class ProjectController extends Controller
             'icon_alt'          => ' Icon Alt Text',
         ]);
 
+        //Upload Slide Image
+        if ($uploadedFile = $request->file('image_id'))
+        {
+            $fileName = time() . $uploadedFile->getClientOriginalName();
+            $uploadedFile->move('dashboardImages/project', $fileName);
+            $filePath = 'dashboardImages/project/'.$fileName;
+            $image = Image::create(['name' => $fileName, 'path' => $filePath, 'alt' => $request->img_alt]);
+            $project->image_id = $image->id;
+        }
+
+        //Upload Slide Image
+        if ($uploadedFile = $request->file('icon'))
+        {
+            $fileName = time() . $uploadedFile->getClientOriginalName();
+            $uploadedFile->move('dashboardImages/project', $fileName);
+            $filePath = 'dashboardImages/project/'.$fileName;
+            $icon = Image::create(['name' => $fileName, 'path' => $filePath, 'alt' => $request->icon_alt]);
+            $project->icon_id = $icon->id;
+        }
+
+        if (empty($request->url))
+        {
+            //$input['url'] = Str::slug($request->title_en).sha1(date("s"));
+            //$input['url'] = Str::slug($request->title_en,'-');
+            $request->url = Str::slug($request->title_en).'-'.date('his');
+        }
+
+        if ($request->video_id)
+        {
+            $video = new Video();
+            $video->url = $request->video_id;
+            $video->created_by=auth()->user()->id;
+            $video->save();
+            $request->video_id = $video->id;
+        }
+        $project->url = $request->url;
+        $project->created_by = $request->created_by;
+        $project->save();
+
         $project->project_ar()->update([
             //'project_id'        => $project->id,
             'title'             => $request->title_ar,
@@ -193,15 +235,23 @@ class ProjectController extends Controller
             'capacity'          => $request->capacity_en
         ]);
 
-        return redirect(adminUrl("project"))->with('create',"Project Created Successfully");
+        $project->page()->update(['url' => $request->url, 'name' => $request->title_en]);
+        $project->open_graph()->update(['og_title' => $request->title_en, 'og_image' =>  $project->image_id, 'og_description' => $request->description_en, 'og_url' => $request->url]);
+        $project->image()->update(['alt' => $request->img_alt]);
+        $project->iconImg()->update(['alt' => $request->icon_alt]);
+
+        return redirect(adminUrl("project"))->with('create',"Project Updated Successfully");
     }
 
-    public function destory($id)
+    public function destroy($id)
     {
         $project = Project::find($id);
         $project->project_ar()->delete();
         $project->project_en()->delete();
         $project->delete();
+
+        return redirect(adminUrl("project"))->with('delete',"Project Deleted Successfully");
+
     }
 
     public function storeImages(Request $request, $id)

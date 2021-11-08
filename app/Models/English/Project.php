@@ -19,7 +19,7 @@ class Project extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['project_id', 'client_name', 'contract_subject', 'capacity'];
+    protected $fillable = ['project_id','title','slug','description', 'client_name', 'contract_subject', 'capacity'];
 
     /**
      * The attributes excluded from the model's JSON form.
