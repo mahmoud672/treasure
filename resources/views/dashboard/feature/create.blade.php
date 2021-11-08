@@ -100,6 +100,11 @@
                                 <input type="file" class="form-control" name="image_id" id="exampleInputEmail1" placeholder="Enter Feature text">
                                 <p class="help-block"> Upload Feature Image </p>
                             </div>
+                            <div class="col-lg-12">
+                                <label for="exampleInputEmail1">Feature Counter</label>
+                                <input type="text" class="form-control" name="counter" id="exampleInputEmail1" placeholder="Enter Feature Counter" value="{{old('counter')}}">
+                                <p class="help-block">Enter Counter of Feature if Exists</p>
+                            </div>
 
                             {{--<div class="col-lg-12">
                                 <label for="exampleInputEmail1"> Video Url</label>

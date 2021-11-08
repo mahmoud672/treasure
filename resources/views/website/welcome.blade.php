@@ -159,7 +159,7 @@
                 <div class="col-md-8">
                     <div class="section_title_one mb-0 wow fadeInDown" data-wow-delay="0.1s">
 
-                        <h2 class="title_head">Our Projects</h2>
+                        <h2 class="title_head">{{__("trans.projects")}}</h2>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -171,23 +171,25 @@
             </div>
             <div class="cons_project_info">
                 <div class="row cons_project_slider">
-                    <div class="col-lg-12">
-                        <div class="pr_slider_item"> <img src="img/projects/pr01.jpg" alt="">
-                            <div class="hover-content">
-                                <h6>architecture</h6>
-                                <h4>Apartment building in the<br> residential district</h4> <a href="#" class="text_btn" data-text="See project">See project <i class="fas fa-arrow-right"></i></a>
+                    @if($projects)
+                        @foreach($projects as $project)
+                            <div class="col-lg-12">
+                                <div class="pr_slider_item"> <img src="{{assetPath($project->image->path)}}" alt="">
+                                    <div class="hover-content">
+                                        <h6>{{$project->lang->title}}</h6>
+                                        <h4>
+                                            {{--Apartment building in the<br> residential district--}}
+                                            {{$project->lang->slug}}
+                                        </h4>
+                                        <a href="{{url("/project/$project->url")}}" class="text_btn" data-text="{{__("trans.read_more")}}">
+                                            {{__("trans.read_more")}}
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="pr_slider_item"> <img src="img/projects/pr02.jpg" alt="">
-                            <div class="hover-content">
-                                <h6>architecture</h6>
-                                <h4>Apartment building in the<br> residential district</h4>
-                                <a href="#" class="text_btn" data-text="See project">See project <i class="fas fa-arrow-right"></i> </a>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -199,30 +201,28 @@
         <div class="container">
             <div class="section_title_one wow fadeInDown">
                 <h6 class="title_top">How we offer you</h6>
-                <h2 class="title_head">Our Projects</h2>
+                <h2 class="title_head">{{__("trans.services")}}</h2>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="offer_service_item pr_slider_item wow fadeInDown" data-wow-delay="0.1s"> <img src="img/services/service_img1.jpg" alt="">
-                        <div class="hover-content"> <i class="icon-metre icon"></i> <a href="#">
-                                <h4>Planning</h4>
-                            </a> <a href="#" class="text_btn" data-text="See service">See service <i class="fas fa-angle-double-right"></i> </a> </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="offer_service_item pr_slider_item wow fadeInDown" data-wow-delay="0.2s"> <img src="img/services/service_img2.jpg" alt="">
-                        <div class="hover-content"> <i class="icon-oil-pump icon"></i> <a href="#">
-                                <h4>Construction</h4>
-                            </a> <a href="#" class="text_btn" data-text="See service">See service <i class="fas fa-angle-double-right"></i> </a> </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="offer_service_item pr_slider_item wow fadeInDown" data-wow-delay="0.3s"> <img src="img/services/service_img3.jpg" alt="">
-                        <div class="hover-content"> <i class="icon-compass1 icon"></i> <a href="#">
-                                <h4>Architecture</h4>
-                            </a> <a href="#" class="text_btn" data-text="See service">See service <i class="fas fa-angle-double-right"></i> </a> </div>
-                    </div>
-                </div>
+                @if($mainServices)
+                    @foreach($mainServices as $service)
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="offer_service_item pr_slider_item wow fadeInDown" data-wow-delay="0.1s">
+                                <img src="{{assetPath($service->image->path)}}" alt="">
+                                <div class="hover-content"> <i class="icon-metre icon"></i>
+                                    <a href="{{url("/service/$service->url")}}">
+                                        <h4>{{$service->lang->title}}</h4>
+                                    </a>
+                                    <a href="#" class="text_btn" data-text="See service">
+                                        {{__("trans.read_more")}}
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </section> <!-- cons_offer service area -->
@@ -232,7 +232,14 @@
     <section class="cons_clients_logo_area">
         <div class="container">
             <div class="clients_logo_inner">
-                <a href="#" class="clients_logo wow fadeInDown">
+                @if($clients)
+                    @foreach($clients as $client)
+                        <a href="#" class="clients_logo wow fadeInDown">
+                            <img src="{{assetPath($client->image->path)}}" alt="">
+                            <img src="{{assetPath($client->image->path)}}" alt=""> </a>
+                    @endforeach
+                @endif
+                {{--<a href="#" class="clients_logo wow fadeInDown">
                     <img src="img/clients/clients_log1.png" alt="">
                     <img src="img/clients/clients_log1.png" alt=""> </a>
                 <a href="#" class="clients_logo wow fadeInDown" data-wow-delay="0.2s">
@@ -246,7 +253,8 @@
                     <img src="img/clients/clients_log4.png" alt=""> </a>
                 <a href="#" class="clients_logo wow fadeInDown" data-wow-delay="0.5s">
                     <img src="img/clients/clients_log5.png" alt="">
-                    <img src="img/clients/clients_log5.png" alt=""> </a> </div>
+                    <img src="img/clients/clients_log5.png" alt=""> </a> --}}
+            </div>
         </div>
     </section> <!-- cons clients logo area -->
 

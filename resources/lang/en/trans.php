@@ -315,8 +315,12 @@ return
     'branch'                        =>  'branch',
     'our_branches'                  =>  'our branches',
     'all_fields_required'           =>  'All fields are required.',
-    'contact_us'                    =>  'us  <span>contact</span>',
+    'contact_us'                    =>  'contact us',
+    'contact_us1'                    =>  'us  <span>contact</span>',
     'more_details'                  =>  'more details',
+    'make_call'                     =>  'Make a call',
+    'main_office'                   =>  'main office',
+    'contact_title'                 =>  'Call us anytime, we strive to answer all inquiries within 24 hours.',
 
     /*==================================================================================================================
     ================================================= Reserve Info =====================================================

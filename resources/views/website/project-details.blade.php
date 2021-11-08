@@ -1,5 +1,5 @@
 @extends('website.layouts.layouts')
-@section('title', $serviceSingle->{'service_'.currentLang()}->title)
+@section('title', $project->{'service_'.currentLang()}->title)
 
 @section('open-graph')
     <meta name="description" content="{{$og->description ? $og->description : $mainOpenGraph->description}}">
@@ -7,7 +7,7 @@
     <!-- open graph meta-->
     <meta property="og:title" content="{{$og->open_graph->og_title ? $og->open_graph->og_title : $mainOpenGraph->open_graph->og_title}}"/>
     <meta property="og:type" content="{{$og->open_graph->og_type ? $og->open_graph->og_type : $mainOpenGraph->open_graph->og_type}}"/>
-    <meta property="og:url" content="{{url('/service')}}"/>
+    <meta property="og:url" content="{{url("/project/$project->url")}}"/>
     <meta property="og:image" content="
     @if($og->open_graph->image_url)
     {{$og->open_graph->image_url}}
@@ -23,7 +23,7 @@
 @endsection
 
 @section('canonical')
-    <link rel="canonical" href="{{url('contact')}}"/>
+    <link rel="canonical" href="{{url("/project/$project->url")}}"/>
 @endsection
 
 @section('header-code')
@@ -44,13 +44,13 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <div class="left">
-                <h4>{{__("trans.services")}}</h4>
+                <h4>{{__("trans.projects")}}</h4>
             </div>
             <div class="right">
                 <ul class="nav">
                     <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
-                    <li><a href="#">{{__("trans.services")}}</a></li>
-                    <li><a href="{{url("/service/$serviceSingle->url")}}">{{$serviceSingle->lang->title}}</a></li>
+                    <li><a href="#">{{__("trans.projects")}}</a></li>
+                    <li><a href="{{url("/project/$project->url")}}">{{$project->lang->title}}</a></li>
                 </ul>
             </div>
         </div>
@@ -66,8 +66,8 @@
 
                 <div class="featured_slick_gallery gray">
                     <div class="featured_slick_gallery-slide">
-                        @if($serviceSingle->images)
-                            @foreach($serviceSingle->images as $image)
+                        @if($project->images)
+                            @foreach($project->images as $image)
                                 <div class="featured_slick_padd">
                                     <a href="{{assetPath($image->path)}}" class="mfp-gallery">
                                         <img src="{{assetPath($image->path)}}" class="img-fluid mx-auto" alt="" />
@@ -83,8 +83,8 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-8">
                             <div class="left">
-                                <h3>{{$serviceSingle->lang->title}}</h3>
-                                {!! $serviceSingle->lang->description !!}
+                                <h3>{{$project->lang->title}}</h3>
+                                {!! $project->lang->description !!}
                             </div>
                         </div>
 

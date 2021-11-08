@@ -45,121 +45,69 @@
 @section('content')
 
 
-<!--Page Title-->
-<section class="page-title" style="background-image: url({{assetPath("website/images/background/page-title.jpg")}});">
-    <div class="auto-container">
-        <div class="content-box">
-            <div class="title">
-                <h1>{{__("trans.contact")}}</h1>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="left">
+                <h4>{{__("trans.contact")}}</h4>
             </div>
-            <ul class="bread-crumb clearfix">
-                <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
-
-
-                <li class="shape"></li>
-                <li>{{__("trans.contact")}}</li>
-            </ul>
-        </div>
-    </div>
-</section>
-<!--End Page Title-->
-
-
-<!-- contact-style-two -->
-<section class="contact-style-two">
-    <div class="outer-container">
-        <div class="auto-container">
-            <div class="row clearfix">
-                <div class="col-lg-6 col-md-12 col-sm-12 form-column">
-                    <div class="inner-box">
-                        <div class="sec-title light">
-                            <p>{{__("trans.always_contact_with_us")}}</p>
-                            <div class="shape"></div>
-
-                        </div>
-                        <div class="form-inner">
-                            @include("website.layouts.messages")
-                            <form method="post" action="{{url("/contact")}}" id="contact-form" class="default-form">
-                               @csrf
-                                <input type="hidden" name="came_from" value="" id="came_from">
-                                <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="text" name="name" placeholder="{{__("trans.form_name")}}" value="{{old("name")}}" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="email" name="email" placeholder="{{__("trans.email")}}" value="{{old("email")}}" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="phone" required value="{{old("phone")}}" placeholder="{{__("trans.form_phone")}}">
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="title" required value="{{old("title")}}" placeholder="{{__("trans.message_title")}}">
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                        <textarea name="message" required placeholder="{{__("trans.message")}}">{{old("message")}}</textarea>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
-                                        <button class="theme-btn-one" type="submit" name="submit-form">{{__("trans.send")}} </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 info-column">
-                    <div class="info-box">
-                        <h3>{{__("trans.address_details")}}</h3>
-                        <ul class="info clearfix">
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <p>{{__("trans.address")}}</p>
-                                <h4>
-                                    {{$contact->address()}}
-                                </h4>
-                            </li>
-                            <li>
-                                <i class="fa fa-phone"></i>
-                                <h4><span>{{__("trans.phone")}}</span><a href="tel:{{$contact->phone}}">{{$contact->phone}}</a></h4>
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope-open"></i>
-                                <h4><span>{{__("trans.email")}}</span><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></h4>
-                            </li>
-                        </ul>
-                        <ul class="social-links clearfix">
-                            @if($contact->facebook)
-                                <li><a href="{{$contact->facebook}}"><i class="fab fa-facebook-f"></i></a></li>
-                            @endif
-
-                            @if($contact->twitter)
-                                <li><a href="{{$contact->twitter}}"><i class="fab fa-twitter"></i></a></li>
-                            @endif
-
-                            @if($contact->pinterest)
-                                <li><a href="{{$contact->pinterest}}"><i class="fab fa-pinterest-p"></i></a></li>
-                            @endif
-
-                            @if($contact->google)
-                                <li><a href="{{$contact->google}}"><i class="fab fa-google-plus-g"></i></a></li>
-                            @endif
-
-                        </ul>
-                    </div>
-                </div>
+            <div class="right">
+                <ul class="nav">
+                    <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
+                    <li><a href="{{url("/contact")}}">{{__("trans.contact_us")}}</a></li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
-<!-- contact-style-two end -->
+<!--================End Breadcrumb Area =================-->
+<div class="map">
+    <iframe src="{{$contact->location}}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+<!-- cons_contact_area_two -->
+<section class="cons_contact_area_two map_area">
+    <img class="map img-fluid" src="{{assetPath("website/assets/img/home-six/map.png")}}" alt="">
+    <div class="container">
+        <div class="row cons_contact_info_two">
 
 
-<!-- google-map-section -->
-<section class="google-map-section">
-    <div class="map-inner">
-        <iframe src="{{$contact->location}}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-
+            <div class="col-lg-6">
+                <div class="cons_about_content pr_100">
+                    <h6 class="title_top">{{__("trans.main_office")}}</h6>
+                    <h2 class="title_head">{{$contact->address()}}</h2>
+                    <p>{{__("trans.contact_title")}} </p>
+                    <a href="#" class="text_btn" data-text="Make a call">{{__("trans.make_call")}}</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @include("website.layouts.messages")
+                <form action="{{url("/contact")}}" method="post" class="contact_form wow fadeInRight">
+                    @csrf
+                    <input type="hidden" name="came_from" value="" id="came_from">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" required placeholder="{{__("trans.form_name")}}" value="{{old("name")}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" required placeholder="{{__("trans.email")}}" value="{{old("email")}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="phone" name="phone" class="form-control" required placeholder="{{__("trans.phone")}}" value="{{old("phone")}}">
+                    </div>
+                    <div class="form-group">
+                                        <textarea class="form-control" name="message"  id="message" cols="30" rows="10" required placeholder="{{__("trans.message")}}">
+                                            {{old("message")}}
+                                        </textarea>
+                    </div>
+                    <div class="form-group"> <button type="submit" class="theme_btn theme_btn_three hover_style1">
+                            {{__("trans.send")}}</button> </div>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
-<!-- google-map-section -->
+<!-- cons_contact_area_two -->
+<!--================End Map Area =================-->
 
 @endsection

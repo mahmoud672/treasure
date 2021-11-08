@@ -40,55 +40,46 @@
 @section('content')
 
 
-<!--Page Title-->
-<section class="page-title" style="background-image: url({{assetPath("website/images/background/page-title.jpg")}});">
-    <div class="auto-container">
-        <div class="content-box">
-            <div class="title">
-                <h1>{{__("trans.gallery")}}</h1>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="left">
+                <h4>{{__("trans.gallery")}}</h4>
             </div>
-            <ul class="bread-crumb clearfix">
-                <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
-                <li class="shape"></li>
-                <li>{{__("trans.gallery")}}</li>
-            </ul>
+            <div class="right">
+                <ul class="nav">
+                    <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
+                    <li><a href="{{url("/gallery")}}">{{__("trans.gallery")}}</a></li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </section>
-<!--End Page Title-->
+<!--================End Breadcrumb Area =================-->
+
+<!-- Gallery Part Start -->
+<section class="gallery_parts pt-2 pb-2 d-xl-block">
+    <div class="container">
 
 
-<!-- gallery-page-section -->
-<section class="gallery-page-section sec-pad-2">
-    <div class="auto-container">
-        <div class="sortable-masonry">
-
-
-            <div class="items-container row clearfix">
-                @if($images)
-                    @foreach($images as $image)
-                        <div class="col-lg-3 col-md-6 col-sm-12 masonry-item small-column all shutters curtains blinds home_drcor">
-                            <div class="project-block-one">
-                                <div class="inner-box">
-                                    <figure class="image-box">
-                                        <img src="{{assetPath($image->image->path)}}" alt="">
-                                    </figure>
-                                    <div class="content-box">
-                                        <div class="view-btn"><a href="{{assetPath($image->image->path)}}" class="lightbox-image" data-fancybox="gallery">+</a></div>
-
-
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row align-items-center">
+            @if($images)
+                @foreach($images as $image)
+                    <div class="col-lg-4 col-md-6 col-sm-12 pr-1">
+                        <div class="gg_single_part">
+                            <a href="{{assetPath($image->image->path)}}" class="mfp-gallery">
+                                <img src="{{assetPath($image->image->path)}}" class="img-fluid mx-auto" alt="" />
+                            </a>
                         </div>
-                    @endforeach
-                @endif
-
-            </div>
+                    </div>
+                @endforeach
+            @endif
 
         </div>
     </div>
 </section>
-<!-- gallery-page-section end -->
+<!-- Gallery Part End -->
 
 @endsection

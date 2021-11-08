@@ -43,6 +43,34 @@ class Project extends Model  {
      */
     protected $dates = ['from_date','to_date'];
 
+    public function image()
+    {
+        return $this->belongsTo(Image::class, 'image_id', 'id')->withDefault();
+    }
+
+    //--------------------- added new -----------------------
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'project_images','project_id','image_id')->withTimestamps();
+    }
+    //------------------ ----------------------- ------------------------ --------------------
+
+    public function iconImg()
+    {
+        return $this->belongsTo(Image::class, 'icon', 'id')->withDefault();
+    }
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id', 'id')->withDefault();
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id')->withDefault();
+    }
+
+
     public function project_ar()
     {
         return $this->hasOne(\App\Models\Arabic\Project::class,'project_id','id')->withDefault();

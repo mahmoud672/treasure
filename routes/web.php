@@ -124,6 +124,7 @@ Route::group(['middleware' => ['Maintenance', 'Lang']], function () {
 
     /*=======   Projects   ========*/
     Route::get('/projects', 'WebsitePagesController@project');
+    Route::get('/project/{url}', 'WebsitePagesController@projectDetails');
 
     /*=======   Branches   ========*/
     Route::get('/branch/{url}', 'WebsitePagesController@branchDetails');

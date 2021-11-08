@@ -63,7 +63,7 @@ class ContactMail
 
         //-- next to send mail with service ---\\
         //$service = Service::with('service_'.currentLang())->where('id',$service_id)->first();
-        self::send_mail($messageView,array('receiver'=>'mahmoudgad672@gmail.com','name'=>$data->name,'email'=>$data->email,'phone'=>$data->phone,'title'=>$data->title,'body_message'=>$data->message));
+        //self::send_mail($messageView,array('receiver'=>'mahmoudgad672@gmail.com','name'=>$data->name,'email'=>$data->email,'phone'=>$data->phone,'title'=>$data->title,'body_message'=>$data->message));
         self::send_mail($messageView,array('receiver'=>'mahmoudfifty801@gmail.com','name'=>$data->name,'email'=>$data->email,'phone'=>$data->phone,'title'=>$data->title,'body_message'=>$data->message));
         //--------------------------------------\\
         //self::send_mail($messageView,array('receiver'=>'mahmoudgad672@gmail.com','name'=>$data->name,'email'=>$data->email,'title'=>'just test','body_message'=>$data->message));

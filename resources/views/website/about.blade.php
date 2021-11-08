@@ -46,162 +46,98 @@
 
 @section('content')
 
-   <!--Page Title-->
-   <section class="page-title" style="background-image: url({{assetPath("website/images/background/page-title.jpg")}});">
-       <div class="auto-container">
-           <div class="content-box">
-               <div class="title">
-                   <h1>{{__("trans.about_us")}}</h1>
-               </div>
-               <ul class="bread-crumb clearfix">
-                   <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
-                   <li class="shape"></li>
-                   <li>{{__("trans.about_us")}}</li>
-               </ul>
-           </div>
-       </div>
-   </section>
-   <!--End Page Title-->
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="left">
+                <h4>{{__("trans.about_us")}}</h4>
+            </div>
+            <div class="right">
+                <ul class="nav">
+                    <li><a href="{{url("/")}}">{{__("trans.home")}}</a></li>
+                    <li><a href="{{url("/about")}}">{{__("trans.about_us")}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Breadcrumb Area =================-->
+<!--================About Us Area =================-->
+<section class="about_main_area">
+    <div class="container">
+        <div class="about_inner">
+            <h6 class="title_top">{{__("trans.values")}}</h6>
+           {{-- <h2 class="title_head">Our proposal was always to change the whole world of construction </h2>
+            <p>We have known how to proceed, innovate and create projects that reflect a vision of the future our vision, porttitor nullam integer porta vivamus proin venenatis consec-tetur, potenti ultrices elementum arcu est. </p>
+            <p>Fringilla phasellus, placerat auctor litora consectetur praesent netus aptent ut ornare netus dictum vivamus et volutpat, nunc lorem enim urna pellentesque egestas aenean tincidunt, torquent felis orci nibh aliquam et praesent placerat eleifend sagit-tis ut magna consequat nibh turpis, vitae donec turpis platea class cras iaculis vitae, imperdiet aenean adipiscing facilisis aptent vivamus placerat morbi ultrices libero consectetur fermentum taciti nec taciti conubia. </p>--}}
+            {!! $about->lang->value !!}
+        </div>
+        <div class="about_img"> <img class="img-fluid" src="{{assetPath($about->valuesImage->path)}}" alt=""> </div>
+    </div>
+</section>
+<!--================End About Us Area =================-->
+<!-- cons thinking area -->
+<section class="cons_vision_area pad_btm">
+    <div class="container">
+        <div class="section_title_one">
+            <h6 class="title_top">Our way of thinking</h6>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="vision_item">
+                    <a href="#" class="img_shadow">
+                        <img src="{{assetPath($about->visionImage->path)}}" alt="">
+                    </a>
+                    <div class="content pr_100">
+                        <h3 class="page_head">{{__("trans.vision")}}</h3>
+                        {{--<p>
+                            The vision of becoming the best quality construction company on the market and the most recognized in the country.
+                        </p>--}}
+                        {!! $about->lang->vision !!}
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="vision_item">
+                    <a href="#" class="img_shadow">
+                        <img src="{{assetPath($about->missionImage->path)}}" alt="">
+                    </a>
+                    <div class="content">
+                        <h3 class="page_head">{{__("trans.mission")}}</h3>
+                        {{--<p>
+                            Each construction idea goes with the proposal to make a high quality project, to exceed the highest standards.
+                        </p>--}}
+                        {!! $about->lang->mission !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- cons thinking area -->
+<!-- cons service area -->
 
-   <!-- about-section -->
-   <section class="about-section">
-       <div class="auto-container">
-           <div class="row clearfix">
-               <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                   <div class="content_block_1">
-                       <div class="content-box">
-                           <div class="sec-title">
+<!-- cons fact area -->
+<section class="cons_fact_area_two">
+    <div class="container">
+        <div class="row">
+            @if($why_us)
+                @foreach($why_us as $feature)
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="fact_item">
+                            <div class="odometer_content">
+                                <h3 class="odometer" data-odometer-final="{{$feature->counter}}"></h3>
+                            </div>
+                            <p>{{$feature->lang->title}}</p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
 
-                               <div class="shape"></div>
-                               <h2>{{__("trans.about_us")}}</h2>
-                           </div>
-                           <div class="text">
-                              {!! $about->lang->description !!}
-                           </div>
-                           <div class="inner-box">
-                               <figure class="vector-image"><img src="{{assetPath("website/images/resource/vector-image-1.png")}}" alt=""></figure>
-                               <div class="inner clearfix">
-                                   @if($why_us)
-                                       <ul class="list-item">
-                                           @foreach($why_us as $feature)
-                                                   <li>{{$feature->lang->title}}</li>
-                                           @endforeach
-                                       </ul>
-                                   @endif
-
-                                  {{-- <ul class="list-item pl-45">
-                                       <li>اعلى جودة
-                                       </li>
-                                       <li>افضل تصميم
-
-                                       </li>
-                                   </ul>--}}
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                   <div class="image_block_1">
-                       <div class="image-box ml-55">
-                           <figure class="vector-image rotate-me"><img src="{{assetPath("website/images/resource/vector-image-2.png")}}" alt=""></figure>
-                           <div class="image-pattern">
-                               <div class="pattern-1"></div>
-                               <div class="pattern-2"></div>
-                               <div class="pattern-3"></div>
-                               <div class="pattern-4"></div>
-                           </div>
-                           <figure class="image"><img src="{{assetPath($about->aboutImage->path)}}" alt=""></figure>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </section>
-   <!-- about-section end -->
-
-
-   <!-- history-section -->
-   <section class="history-section">
-       <div class="auto-container">
-           <div class="sec-title centred">
-
-               <div class="shape"></div>
-               <h2></h2>
-           </div>
-           <div class="tabs-box">
-               <div class="tab-btn-box">
-                   <ul class="tab-btns tab-buttons centred clearfix">
-                       <li class="tab-btn" data-tab="#tab-1">{{__("trans.mission")}}</li>
-                       <li class="tab-btn active-btn" data-tab="#tab-2">{{__("trans.vision")}}</li>
-                       <li class="tab-btn" data-tab="#tab-3">{{__("trans.values")}}</li>
-
-                   </ul>
-               </div>
-               <div class="tabs-content">
-                   <div class="tab" id="tab-1">
-                       <div class="row clearfix align-items-center">
-                           <div class="col-lg-6 col-md-6 col-sm-12 image-column">
-                               <div class="image-box">
-                                   <figure class="image"><img src="{{assetPath($about->missionImage->path)}}" alt=""></figure>
-                               </div>
-                           </div>
-                           <div class="col-lg-6 col-md-6 col-sm-12 content-column">
-                               <div class="content_block_3">
-                                   <div class="content-box">
-                                       <h2>{{__("trans.mission")}}</h2>
-
-                                       {!! $about->lang->mission !!}
-
-
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="tab active-tab" id="tab-2">
-                       <div class="row clearfix align-items-center">
-                           <div class="col-lg-6 col-md-6 col-sm-12 image-column">
-                               <div class="image-box">
-                                   <figure class="image"><img src="{{assetPath($about->visionImage->path)}}" alt=""></figure>
-                               </div>
-                           </div>
-                           <div class="col-lg-6 col-md-6 col-sm-12 content-column">
-                               <div class="content_block_3">
-                                   <div class="content-box">
-                                       <h2>{{__("trans.vision")}}</h2>
-                                       {!! $about->lang->vision !!}
-
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="tab" id="tab-3">
-                       <div class="row clearfix align-items-center">
-                           <div class="col-lg-6 col-md-6 col-sm-12 image-column">
-                               <div class="image-box">
-                                   <figure class="image"><img src="{{assetPath($about->valuesImage->path)}}" alt=""></figure>
-                               </div>
-                           </div>
-                           <div class="col-lg-6 col-md-6 col-sm-12 content-column">
-                               <div class="content_block_3">
-                                   <div class="content-box">
-                                       <h2>{{__("trans.values")}}</h2>
-                                       {!! $about->lang->value !!}
-
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-               </div>
-           </div>
-       </div>
-   </section>
-   <!-- history-section end -->
+        </div>
+    </div>
+</section> <!-- cons_team_area two -->
 
 
 @endsection

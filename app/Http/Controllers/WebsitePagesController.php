@@ -20,6 +20,7 @@ use App\Models\Image;
 use App\Models\Message;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Project;
 use App\Models\Reservation;
 use App\Models\Slider;
 use App\Models\Service;
@@ -663,6 +664,14 @@ class WebsitePagesController extends Controller
         $headerCode = Page::with('open_graph')->where('url','project')->first();
         $images = Gallery::with('image')->where('video_url', null)->where('status','projects')->get();
         return view('website.projects',compact('og','headerCode','images'));
+    }
+
+    public function projectDetails($url){
+        $og = Page::with('open_graph')->where('url','project')->first();
+        $headerCode = Page::with('open_graph')->where('url','project')->first();
+        $project = Project::with('project_'.currentLang())->where('url', $url)->first();
+
+        return view('website.project-details',compact('og','headerCode','project'));
     }
 
 
