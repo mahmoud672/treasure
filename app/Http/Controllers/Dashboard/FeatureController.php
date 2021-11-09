@@ -69,11 +69,12 @@ class FeatureController extends Controller
         /*$input['created_by'] = Auth::user()->id;*/
         $request->validate([
             'title_en'          => 'bail|required|max:200',
-            'description_en'    => 'bail',
-            'slug_en'           => 'bail|max:300',
             'title_ar'          => 'bail|required|max:200',
+            'description_en'    => 'bail',
             'description_ar'    => 'bail',
+            'slug_en'           => 'bail|max:300',
             'slug_ar'           => 'bail|max:300',
+            'counter'           => 'bail|nullable|numeric',
             'image_id'          => 'bail|mimes:jpeg,jpg,png,gif',
         ], [], [
             'title_en'          => ' Title in English',
@@ -100,6 +101,7 @@ class FeatureController extends Controller
 
         //$feature->created_by = $input['created_by'];
         $feature->status = $request->status ? $request->status : null ;
+        $feature->counter = $request->counter;
         $feature->save();
 
         $feature->feature_ar()->create(['feature_id' => $feature->id, 'title' => $input['title_ar'], 'description' => $input['description_ar'], 'slug' => $input['slug_ar']]);
@@ -136,11 +138,12 @@ class FeatureController extends Controller
         //$input['created_by'] = Auth::user()->id;
         $request->validate([
             'title_en'          => 'bail|required|max:200',
-            'description_en'    => 'bail',
-            'slug_en'           => 'bail|max:300',
             'title_ar'          => 'bail|required|max:200',
+            'description_en'    => 'bail',
             'description_ar'    => 'bail',
+            'slug_en'           => 'bail|max:300',
             'slug_ar'           => 'bail|max:300',
+            'counter'           => 'bail|nullable|numeric',
             'image_id'          => 'mimes:jpeg,jpg,png,gif',
         ], [], [
             'title_en'          => ' Title in English',
@@ -163,6 +166,7 @@ class FeatureController extends Controller
             $feature->image_id = $input['image_id'];
         }
 
+        $feature->counter = $request->counter;
         $feature->save();
 
         $feature->feature_ar()->update(['feature_id' => $feature->id, 'title' => $input['title_ar'], 'description' => $input['description_ar'], 'slug' => $input['slug_ar']]);

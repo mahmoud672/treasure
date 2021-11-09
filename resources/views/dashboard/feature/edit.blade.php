@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="exampleInputEmail1">Feature Counter</label>
-                                    <input type="text" class="form-control" name="counter" id="exampleInputEmail1" placeholder="Enter Feature Counter" value="{{$feature->counter}}">
+                                    <input type="number" class="form-control" name="counter" id="exampleInputEmail1" placeholder="Enter Feature Counter" value="{{$feature->counter}}">
                                     <p class="help-block">Enter Counter of Feature if Exists</p>
                                 </div>
 

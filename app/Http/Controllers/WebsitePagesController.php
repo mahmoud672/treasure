@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ContactMail;
+use App\Classes\ContactMailHelper;
 use App\Models\Album;
 use App\Models\Appointment;
 use App\Models\Arabic\ServiceArabic;
@@ -288,12 +289,11 @@ class WebsitePagesController extends Controller
          ]);
         //ContactMail::submitForm($request->name,$request->phone,$request->email,$request->title,$request->message,$request->service_id);
 
-        ContactMail::mailService($request,"mahmoudgad672@gmail.com");
-
+        //ContactMail::mailService($request,"mahmoudgad672@gmail.com");
+        $contactMessage = new ContactMailHelper($request->name,$request->phone,$request->email,$request->title,$request->message,$request->service_id);
+        $contactMessage->sendMail();
         return redirect(url($input['came_from']))->with("create","Your Request has been sent successfully "." ".$reservation->name);
-        //Session::flash("create', ' تم الحجز بنجاح ' . $reservation->name .  ' سوف يتم تأكيد الحجز في اقرب وقت '");
-        //return back()->with("create', ' تم الحجز بنجاح ' . $reservation->name .  ' سوف يتم تأكيد الحجز في اقرب وقت '");
-        //return back();
+
 
     }
 
@@ -397,14 +397,12 @@ class WebsitePagesController extends Controller
             'message'        => 'Message',
             'service_id'     => 'Service',
         ]);
-        //$name = $request->fname." ".$request->lname;
-        /*if(ContactMail::submitForm($request->name,$request->phone,$request->email,$request->title,$request->message)){
-            return redirect()->back()->with("create","Message was sent successfully....");
-        }else{
-            return redirect()->back()->with("warning","Message was sent successfully");
-        }*/
 
-        ContactMail::submitForm($request->name,$request->phone,$request->email,$request->title,$request->message);
+
+        //ContactMail::submitForm($request->name,$request->phone,$request->email,$request->title,$request->message);
+
+        $contactMessage = new ContactMailHelper($request->name,$request->phone,$request->email,$request->title,$request->message);
+        $contactMessage->sendMail();
 
         return back()->with("create",__("trans.thanks_msg"));
 
